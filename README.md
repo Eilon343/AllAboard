@@ -1,10 +1,12 @@
-# [Game name]
+# All Aboard!
 
-**Team:** [Name 1] · [Name 2] · [Name 3]
+**Team:** Eilon Grinberg, Dor Mandel
 **Course:** Mobile Game Development, Shenkar
 
 ## The game in one sentence
-[What does the player do, and why do they come back tomorrow?]
+Steer your ship with one thumb, intercept passing vessels and choose in a split second
+whether to plunder them or befriend them, then spend the loot upgrading your ship for the next 1–3 minute run.
+
 
 ## How to open and build
 1. Open the project in Unity 6 LTS (the exact version is on Moodle).
