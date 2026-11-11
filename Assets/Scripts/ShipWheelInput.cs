@@ -22,7 +22,7 @@ public class ShipWheelInput : MonoBehaviour,
     [Tooltip("UI RectTransform to rotate; defaults to this object's RectTransform.")]
     [SerializeField] private RectTransform wheel;
 
-    [Tooltip("Maximum wheel rotation in degrees in either direction (suggested: 1080).")]
+    [Tooltip("Maximum wheel rotation in degrees in either direction (tested preset: 1080 = 3 full turns).")]
     [SerializeField] private float maxAngle = 1080f;
 
     [Tooltip("Multiplier for finger movement. 1 means no extra scaling.")]
@@ -45,6 +45,15 @@ public class ShipWheelInput : MonoBehaviour,
     /// The '=>' syntax returns the private steering value (equivalent to a getter).
     /// </summary>
     public float Steering => steering;
+
+    /// <summary>Accumulated visual wheel angle in degrees (can exceed 360).</summary>
+    public float CurrentAngle => currentAngle;
+
+    /// <summary>Maximum permitted wheel angle on each side; for haptic limit detection.</summary>
+    public float MaxAngle => maxAngle;
+
+    /// <summary>True only while the player is actively dragging the wheel.</summary>
+    public bool IsDragging => dragging;
 
     // Internal state. These values don't need to appear in the Inspector.
     private float currentAngle;         // Wheel's accumulated angle in degrees.
@@ -170,7 +179,7 @@ public class ShipWheelInput : MonoBehaviour,
 
         // Unity's positive Z rotation is counterclockwise.
         // Negating it makes CLOCKWISE steering positive (right turn).
-        // Example: currentAngle = -60, maxAngle = 120 -> Steering = +0.5.
+        // Example: currentAngle = -540, maxAngle = 1080 -> Steering = +0.5.
         steering = Mathf.Clamp(
             -currentAngle / maxAngle,
             -1f,
