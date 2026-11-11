@@ -62,8 +62,68 @@ Make the camera follow the ship instead of locking it perfectly to the center.
 | `ShipMotor2D.cs` | Handle ship velocity and turning |
 | `FollowCamera2D.cs` | Follow ship with damping and screen offset |
 | `ShipDebugHUD.cs` | Show steering, heading, speed and camera offset during testing |
+| `FrameRateSettings.cs` (planned) | FPS preferences and refresh-rate diagnostics |
+| `HapticsDeveloperPanel.cs` (planned) | Runtime adjustment of haptic presets |
+| `HeadingCompassUI.cs` (planned) | Display ship heading as a scrolling top compass |
 
 Our first version should remain small. We can later replace or expand individual systems without rebuilding the entire game.
+
+## Phase 5 — High refresh rate and performance (planned)
+
+**Goal:** Keep gameplay responsive across 30/60/90/120 Hz screens, particularly 120 Hz Android phones, without changing gameplay speed.
+
+- Plan an FPS mode: **Auto / 30 / 60 / 120**, showing only practical choices for the device when possible. 90 FPS can be offered on displays supporting it.
+- Use `Application.targetFrameRate` on mobile. Measure the **actual** FPS and display refresh rate; Android may cap performance based on power, thermal and frame-pacing policies.
+- Avoid tying input, movement, animation or haptic cooldowns to a frame count. Use time-based calculations; use a consistent fixed physics step and interpolation for the future `Rigidbody2D` ship.
+- Maintain touch responsiveness, a stable camera, and smooth wheel animation at both 60 FPS and 120 FPS.
+- Profile on a physical phone: average FPS, slow frames / frame time, latency, memory allocations, battery heat and throttling over multiple minutes.
+- Test Unity Android **Optimized Frame Pacing** and document the device-specific results.
+
+**Done when:** Selecting an FPS preference works on Android and the same steering input leads to consistent movement at different FPS rates. 120 FPS is an option, not a requirement.
+
+## Phase 6 — Ship Haptics + developer tuning panel (planned)
+
+**Current implementation:** `ShipWheelInput`, `ShipWheelHaptics`, and `ShipHapticsEngine` exist, and Unity Editor logs confirm wheel-tick and end-stop events. Physical vibration still requires testing on the phone.
+
+- **Player-facing setting:** a simple Haptics On/Off accessibility toggle.
+- **Developer-only mode:** tune the wheel click preset, click spacing, cooldown, end-stop preset and threshold, direction-change feedback, and master switch **inside the running game**.
+- Provide `Test Tick`, `Test End Stop`, and `Reset Defaults` controls. Show feedback-event counts and current settings.
+- Keep the panel hidden in normal release gameplay; development builds are the simplest initial option.
+- Preserve the current wheel baseline: **1080° / sensitivity 1 / auto-center on / return 480°/s**.
+- Preserve current haptic test baseline: **35° per tick / 0.09s cooldown / 3° end tolerance / 40° reset distance / direction feedback off**.
+- Android `performHapticFeedback` named patterns do **not** guarantee a specific vibration strength. Advanced amplitude/waveforms require separately evaluating `VibrationEffect` and hardware/permission compatibility.
+- Keep controls fully usable even on phones without haptics or when vibration is disabled. Avoid feedback on automatic centering.
+
+**Done when:** Haptics can be tested and adjusted on a real phone without recompiling for every small change, without creating log spam or constant buzzing.
+
+## Phase 7 — Dynamic ship-heading compass (planned)
+
+**Visual direction:** a slim horizontal bearing tape at the top, inspired by COD / Battlefield:
+
+`| · · W · · | · · N · · | · · E · · |`
+
+- The compass follows the **ship's actual world heading**, not the steering wheel's visual angle.
+- Use N / E / S / W, optionally NE / SE / SW / NW, degree ticks, and a fixed center reference marker. Scroll bearing labels underneath it.
+- Interpolate changes smoothly and correctly handle 359° → 0° wrapping.
+- The first camera remains **north-up**, but compass meaning should remain consistent if a rotating camera is tested later.
+- Keep the strip readable within the Safe Area without colliding with Back, HP, Score or Coins. Test the current portrait phone layouts.
+- Future additions: wind bearing, objectives and enemy markers; the minimap later derives from the same world coordinates and heading information.
+
+**Done when:** Turning the ship updates the compass correctly and smoothly, including at 0/360°.
+
+## Updated implementation order
+
+1. **Android haptic validation:** test physical clicks/end-stop; keep Editor logging off during performance profiling.
+2. **ShipMotor2D:** turn the ship with wheel steering and introduce forward movement and controlled inertia.
+3. **FollowCamera2D:** near-centered ship with limited camera lag and world-space scrolling.
+4. **FPS diagnostics and options:** compare sustained 60/120 FPS on Android; assess frame pacing.
+5. **Developer haptics panel:** enable in-build tuning and reset-to-default.
+6. **Heading compass:** use ship world rotation and safe-area layout.
+7. Wind, water, minimap and upgrades after the control loop feels correct.
+
+**Documentation rule:** This file records plans and experiments. Put only **confirmed team choices** in the root `DECISIONS.md`; don't call proposed features implemented.
+
+---
 
 ## Future systems — not part of this first implementation
 
