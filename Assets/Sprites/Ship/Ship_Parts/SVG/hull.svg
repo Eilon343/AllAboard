@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="322" height="1019" viewBox="239 95 322 1019">
+<defs>
+ <clipPath id="deckClip"><path d="M400 145 C430 162 479 213 505 268 Q525 309 526 357 L526 877 Q529 984 476 1031 Q446 1057 400 1060 Q354 1057 324 1031 Q271 984 274 877 L274 357 Q275 309 295 268 C321 213 370 162 400 145 Z"/></clipPath>
+</defs>
+<!-- Hull silhouette with golden wooden rail -->
+<path d="M400 110 C430 120 489 188 525 243 Q558 293 558 359 L558 886 Q559 985 511 1058 Q467 1111 400 1111 Q333 1111 289 1058 Q241 985 242 886 L242 359 Q242 293 275 243 C311 188 370 120 400 110 Z" fill="#FFBA55"/>
+<path d="M400 145 C430 162 479 213 505 268 Q525 309 526 357 L526 877 Q529 984 476 1031 Q446 1057 400 1060 Q354 1057 324 1031 Q271 984 274 877 L274 357 Q275 309 295 268 C321 213 370 162 400 145 Z" fill="#D9834B" stroke="#733C3B" stroke-width="17" stroke-linejoin="round"/>
+<g clip-path="url(#deckClip)" fill="none" stroke="#B86441" stroke-width="9" opacity="0.75">
+ <path d="M326 142 V1080 M368 140 V1080 M432 140 V1080 M474 142 V1080"/>
+ <path d="M270 370 H530 M270 518 H530 M270 635 H530 M270 772 H530 M270 895 H530 M270 1010 H530" stroke-width="7"/>
+</g>
+<!-- Stern bench, minimal straight bars -->
+<path d="M284 905 H516 V922 H284Z" fill="#EBA05B"/>
+<path d="M314 999 Q400 1028 486 999" fill="none" stroke="#A3563D" stroke-width="11" opacity=".8"/>
+<!-- Simple bow cap -->
+<path d="M385 112 Q385 99 396 98 H404 Q415 99 415 112 L424 167 Q424 179 410 183 H390 Q376 179 376 167 Z" fill="#FFBD62"/>
+</svg>

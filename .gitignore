@@ -32,3 +32,6 @@ crashlytics-build.properties
 *.keystore
 *.jks
 *.slnx
+
+# Unity Android temporary native build files
+.utmp/

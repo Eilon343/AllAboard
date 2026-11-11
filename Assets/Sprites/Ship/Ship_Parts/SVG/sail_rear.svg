@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="536" height="159" viewBox="132 612 536 159">
+<!-- Rear sail, includes its own yard; swappable as one part -->
+<path d="M155 737 C219 640 308 615 400 615 C492 615 581 640 645 737 Z" fill="#382B2D"/>
+<path d="M176 729 Q400 627 624 729" stroke="#493638" stroke-width="8" fill="none"/>
+<path d="M146 740 H654" stroke="#783F40" stroke-width="19" stroke-linecap="round"/>
+<rect x="135" y="725" width="23" height="31" rx="10" fill="#FFB956"/>
+<rect x="642" y="725" width="23" height="31" rx="10" fill="#FFB956"/>
+<circle cx="400" cy="740" r="28" fill="#FFB95A"/>
+<circle cx="400" cy="740" r="9" fill="#FFF4DA"/>
+</svg>

@@ -19,3 +19,21 @@ whether to plunder them or befriend them, then spend the loot upgrading your shi
 | `pitch.md` | One-page pitch of the game |
 | `DECISIONS.md` | Every real decision the team made, and why |
 | `AGENTS.md` | Context for AI coding tools: architecture, rules, conventions |
+
+---
+
+## Milestone 2 — Mobile Greybox
+
+We built and tested two scenes, Home and Level, on Android.
+
+The Level scene includes a basic HUD, ship placeholder, steering wheel, and Friendly/Aggressive toggle. Gameplay mechanics are planned for the next stage.
+
+### Phone demonstration
+[Watch our gameplay recording](Assets/Docs/Videos/VID-20261111-WA0008.mp4)
+
+### Device Simulator screenshots
+- [Simulator screenshot 1](Assets/Docs/Images/SimulatorScreenshot1.png)
+- [Simulator screenshot 2](Assets/Docs/Images/SimulatorScreenshot2.png)
+
+### Design decisions
+[Read our decision log](DECISIONS.md)

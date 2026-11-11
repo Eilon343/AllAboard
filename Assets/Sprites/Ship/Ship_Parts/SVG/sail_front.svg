@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="470" height="144" viewBox="165 349 470 144">
+<!-- Front (bow) sail, includes its own yard; swappable as one part -->
+<path d="M188 459 C252 377 308 352 400 352 C492 352 548 377 612 459 Z" fill="#382B2D"/>
+<path d="M209 451 Q400 364 591 451" stroke="#493638" stroke-width="8" fill="none"/>
+<path d="M179 462 H621" stroke="#783F40" stroke-width="19" stroke-linecap="round"/>
+<rect x="168" y="447" width="23" height="31" rx="10" fill="#FFB956"/>
+<rect x="609" y="447" width="23" height="31" rx="10" fill="#FFB956"/>
+<circle cx="400" cy="462" r="28" fill="#FFB95A"/>
+<circle cx="400" cy="462" r="9" fill="#FFF4DA"/>
+</svg>

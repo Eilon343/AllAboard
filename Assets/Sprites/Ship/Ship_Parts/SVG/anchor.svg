@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="150" viewBox="340 910 120 150">
+<!-- Drop-able ship anchor, resting on stern deck -->
+<circle cx="400" cy="939" r="19" stroke="#753B3B" stroke-width="14" fill="none"/>
+<path d="M400 959 V1022" stroke="#753B3B" stroke-width="15" stroke-linecap="round"/>
+<path d="M375 972 H425" stroke="#753B3B" stroke-width="12" stroke-linecap="round"/>
+<path d="M355 999 Q356 1047 400 1049 Q444 1047 445 999" stroke="#753B3B" stroke-width="16" fill="none" stroke-linecap="round"/>
+<path d="M343 992 L360 1001 L367 982 Z M457 992 L440 1001 L433 982 Z" fill="#753B3B"/>
+</svg>
