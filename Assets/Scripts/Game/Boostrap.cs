@@ -8,7 +8,8 @@ public class Bootstrap : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);       // Services survives every scene change
 
-        // Start every service here, in order (next follow-along)
+        // Start every service here, in order
+        Services.Save = new PlayerPrefsSaveService();   // 1 · save
 
         Debug.Log("Bootstrap: services ready");
         SceneManager.LoadScene("Home");      // only now: the first screen
