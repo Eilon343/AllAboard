@@ -3,6 +3,30 @@
 
 A few decisions we made while putting together the first version of **All Aboard!**. We're keeping this log short and adding to it as we actually make choices.
 
+## 2026-11-17 — Minimum Android API 29 (Android 10)
+
+**Options:** API 26 (Android 8) / API 29 (Android 10) / higher
+
+**Chose:** Set the minimum API level to **29 (Android 10)**, and lock the game to **Portrait**.
+
+**Why:** Only very old phones are left out, and the casual players we're aiming for mostly use newer ones. From Android 9 the system reports the notch (DisplayCutout), so our SafeAreaFitter behaves the same on every phone that can install the game. Supporting fewer old Android versions also means less to test and no very weak devices running our effects. The trade-off: players still on Android 8–9 can't install the game.
+
+**AI:** Explained what the minimum API controls and the trade-off. We made the choice and changed it in Player Settings.
+
+**Who:** Dor and Eilon.
+
+## 2026-11-17 — Android package name: com.eilondor.allaboard
+
+**Options:** Keep Unity's default (com.DefaultCompany…) / com.eilondor.allaboard / a name tied to a domain we don't own
+
+**Chose:** **com.eilondor.allaboard**: our team name plus the game name, all lowercase.
+
+**Why:** The package name is the game's permanent ID on Google Play. Once the game is published it can't be changed, so we picked it now instead of shipping Unity's default. Using our names keeps it unique without needing a website domain.
+
+**AI:** Explained what the package name is used for and why it can't change after publishing. We picked the name.
+
+**Who:** Dor and Eilon.
+
 ## 2026-11-11 — Put the controls where they feel natural
 
 **Options:** Spread the controls evenly around the screen / group them around how someone actually holds a phone
