@@ -13,6 +13,7 @@ public class Bootstrap : MonoBehaviour
 
         // Start every service here, in order
         Services.Save = new PlayerPrefsSaveService();   // 1 · save
+        Services.Settings = new SettingsService(Services.Save); // init settings using save service
 
         Debug.Log("Bootstrap: services ready");
 
