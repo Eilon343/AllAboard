@@ -1,39 +1,36 @@
-# All Aboard!
+# All Aboard! 🚢
 
-**Team:** Eilon Grinberg, Dor Mandel
-**Course:** Mobile Game Development, Shenkar
+**Team:** Eilon Grinberg & Dor Mandel  
+**Course:** Mobile Game Development, Shenkar  
+**Engine:** Unity 6000.6.7f1 · **Platform:** Android, Portrait, API 29+, IL2CPP/ARM64
 
-## The game in one sentence
-Steer your ship with one thumb, intercept passing vessels and choose in a split second
-whether to plunder them or befriend them, then spend the loot upgrading your ship for the next 1–3 minute run.
+## The game
 
+A one-thumb, hybrid-casual sailing game. Players will steer a ship, choose whether to befriend or attack passing vessels, and use rewards to upgrade their ship across short 1–3 minute runs. The current build is a mobile greybox; full sailing and encounter mechanics are planned.
 
-## How to open and build
-1. Open the project in Unity 6 LTS (the exact version is on Moodle).
-2. File → Build Profiles → Android → Switch Platform.
-3. Build and run on an Android phone.
+## Milestone 3 — Built to change
 
-## Repo map
-| File | What it is |
-| --- | --- |
-| `pitch.md` | One-page pitch of the game |
-| `DECISIONS.md` | Every real decision the team made, and why |
-| `AGENTS.md` | Context for AI coding tools: architecture, rules, conventions |
+![All Aboard! architecture — scenes, services and initialization order](Assets/Docs/Images/architecture.png)
 
----
+- **Bootstrap:** The first scene initializes `Services.Save`, then `Services.Settings`, before opening `Home`.
+- **Scenes:** `Home` and `Level` navigate through `ScreenFlow`.
+- **Save service:** `ISaveService` + `PlayerPrefsSaveService` persist coins; screens access storage through `Services.Save`.
+- **Settings service:** `ISettingsService` + `SettingsService` persist `SoundOn` through the save interface. A reusable `SoundToggleUI` prefab displays mute/unmute sprites.
+- **Assemblies:** `Game.asmdef` references `Services.asmdef`; Services never references Game. Screens never call `PlayerPrefs` directly.
+- **Documentation:** `DECISIONS.md` records design choices; Eilon is completing `AGENTS.md` for the final architecture.
 
-## Milestone 2 — Mobile Greybox
+**Second-service PR:** Add the link here after the PR is reviewed and merged.
 
-We built and tested two scenes, Home and Level, on Android.
+## Run the project
 
-The Level scene includes a basic HUD, ship placeholder, steering wheel, and Friendly/Aggressive toggle. Gameplay mechanics are planned for the next stage.
+Open in **Unity 6000.6.7f1**, choose the **Android** Build Profile, and verify the enabled Scene List is `Bootstrap → Home → Level`. Run from Bootstrap or build to an Android device.
 
-### Phone demonstration
-[Watch our gameplay recording](Assets/Docs/Videos/VID-20261111-WA0008.mp4)
+## Milestone 2 — Mobile greybox
 
-### Device Simulator screenshots
-- [Simulator screenshot 1](Assets/Docs/Images/SimulatorScreenshot1.png)
-- [Simulator screenshot 2](Assets/Docs/Images/SimulatorScreenshot2.png)
+Built phone-oriented `Home` and `Level` screens, including the HUD, ship placeholder, steering-wheel UI and Friendly/Aggressive toggle. Applied lecturer feedback to Android orientation/API, Level Canvas scaling, Back button size and Safe Area handling.
 
-### Design decisions
-[Read our decision log](DECISIONS.md)
+**Evidence:** [Phone recording](Assets/Docs/Videos/VID-20261111-WA0008.mp4) · [Simulator screenshot 1](Assets/Docs/Images/SimulatorScreenshot1.png) · [Simulator screenshot 2](Assets/Docs/Images/SimulatorScreenshot2.png)
+
+## Links
+
+[Game pitch](pitch.md) · [Decisions](DECISIONS.md) · [Agent guidelines](AGENTS.md) · [Milestone 3 branch](https://github.com/Eilon343/AllAboard/tree/milestone-3)
