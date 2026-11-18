@@ -3,6 +3,18 @@
 
 A few decisions we made while putting together the first version of **All Aboard!**. We're keeping this log short and adding to it as we actually make choices.
 
+## 2026-11-18 — Save through an interface, not PlayerPrefs
+
+**Options:** Call `PlayerPrefs` directly from each screen / put saving behind an `ISaveService` interface
+
+**Chose:** Every script saves through **`Services.Save`** (`ISaveService`). Today the only implementation is `PlayerPrefsSaveService`; screens like `CoinCounter` and the sound toggle never touch `PlayerPrefs`.
+
+**Why:** All saving goes through one place, so every save key lives in one class. The `"Coins"` vs `"coins"` bug happened because a screen wrote its own key. If we ever change how we save (a JSON file instead of PlayerPrefs, for example), we write one new class and change one line in Bootstrap, and no screen has to change. It also let us build `SettingsService` on top of Save without touching how saving works.
+
+**AI:** Explained the pattern from the lesson and found the `"Coins"`/`"coins"` key bug in CoinCounter. We chose to keep every screen behind `Services`.
+
+**Who:** Dor and Eilon.
+
 ## 2026-11-17 — Minimum Android API 29 (Android 10)
 
 **Options:** API 26 (Android 8) / API 29 (Android 10) / higher
