@@ -21,12 +21,17 @@ architecture. Ship physics, encounters, combat, upgrades and full audio are plan
   Bootstrap is first in the Scene List and runs once; after that only Home and Level load.
 - **Init order** in `Bootstrap.Awake()` (`Assets/Scripts/Game/Boostrap.cs`): `DontDestroyOnLoad`, then
   1. `Services.Save = new PlayerPrefsSaveService()`
-  2. `Services.Settings = new SettingsService(Services.Save)` (needs Save, so it comes after)
-  3. load Home
+  2. `Services.Config = new ScriptableObjectConfigService(economyConfig)` (the asset from Bootstrap's
+     `economyConfig` field in the Bootstrap scene)
+  3. `Services.Settings = new SettingsService(Services.Save)` (needs Save, so it comes after)
+  4. load Home
 - **Services** (`Assets/Scripts/Services`), each behind an interface:
   - `ISaveService` (GetInt / SetInt) → `PlayerPrefsSaveService`. The only class that touches PlayerPrefs.
   - `ISettingsService` (SoundOn) → `SettingsService`. Saves `SoundOn` through `ISaveService`
     (key `settings.soundOn`, on by default) and mutes or unmutes the game with `AudioListener.volume`.
+  - `IConfigService` (Economy) → `ScriptableObjectConfigService`. Hands out `EconomyConfig`, a
+    ScriptableObject with every economy number (rewards, prices, upgrade curve, `UpgradeCost(level)`).
+    Values live in `Assets/Config/EconomyConfig.asset` and match our economy sheet (linked in the README).
   - `Services`: the static class where every script finds them.
 - **Screens use `Services`, never `PlayerPrefs`.**
   - `CoinCounter` (Home) adds and shows coins through `Services.Save` (key `coins`).
@@ -44,7 +49,10 @@ architecture. Ship physics, encounters, combat, upgrades and full audio are plan
 
 ## Rules for AI
 - Read AGENTS.md, README.md and DECISIONS.md before you start.
-- Follow the existing folder structure and naming. Don't create new top-level folders.
+- Follow the existing folder structure and naming. Don't create new top-level folders
+  (`Assets/Config` exists because the course asks for it).
+- Economy numbers (rewards, prices, curves) live in `EconomyConfig`, never in scripts. Read them with
+  `Services.Config.Economy`. A new number is a new field in `EconomyConfig`, filled in on the asset.
 - Don't invent APIs. If unsure about an SDK or Unity API, say so and point to the docs.
 - Don't change Player Settings, ProjectSettings, Build Profiles, the package name, API levels or
   assembly references unless asked, and say how to test the change.
@@ -69,4 +77,5 @@ architecture. Ship physics, encounters, combat, upgrades and full audio are plan
 - Work on a branch (`feature/…`, `fix/…`) and merge through a pull request. A PR made with AI ends
   with "What the AI did / what I checked"; one written by hand ends with "What I wrote / how I tested it".
 - Every real decision gets a `DECISIONS.md` entry.
-- Submissions: a `milestone-N` branch cut from `main` before the deadline, never changed after.
+- Milestones: feature branches merge through pull requests into `milestone-N`, the branch we submit.
+  After the deadline it never changes.
