@@ -6,6 +6,7 @@ public class Bootstrap : MonoBehaviour
 {
     // Editor only: the scene you were editing when you pressed Play (set by Assets/Editor/PlayFromBootstrap.cs).
     public const string EditorStartSceneKey = "AllAboard.PlayFromBootstrap.StartScene";
+    [SerializeField] EconomyConfig economyConfig;
 
     void Awake()
     {
@@ -13,7 +14,10 @@ public class Bootstrap : MonoBehaviour
 
         // Start every service here, in order
         Services.Save = new PlayerPrefsSaveService();   // 1 · save
+        Services.Config = new ScriptableObjectConfigService(economyConfig); // init config using scriptable object
         Services.Settings = new SettingsService(Services.Save); // init settings using save service
+        if (economyConfig == null)
+            Debug.LogError("Bootstrap: drag the EconomyConfig asset into the Economy Config field");
 
         Debug.Log("Bootstrap: services ready");
 
