@@ -8,6 +8,10 @@
 
 A one-thumb, hybrid-casual sailing game. Players will steer a ship, choose whether to befriend or attack passing vessels, and use rewards to upgrade their ship across short 1–3 minute runs. The current build is a mobile greybox; full sailing and encounter mechanics are planned.
 
+## Milestone 4 — Economy
+
+**[Economy sheet](https://docs.google.com/spreadsheets/d/1MK3pVl9tQjG8-5nP4lOEgUonI_AhnZWor8q7vUXKwgg/edit?usp=sharing)**: one currency (coins). Per session (~3 runs): 320 coins in (stages cleared, daily gift, plundered ships), 50 out (Continue), 270 left for upgrades. Upgrade price = 150 × 1.5^(upgrade − 1). Both checks: **Yes**.
+
 ## Milestone 3 — Built to change
 
 ![All Aboard! architecture — scenes, services and initialization order](Assets/Docs/Images/architecture.png)
@@ -33,4 +37,4 @@ Built phone-oriented `Home` and `Level` screens, including the HUD, ship placeho
 
 ## Links
 
-[Game pitch](pitch.md) · [Decisions](DECISIONS.md) · [Agent guidelines](AGENTS.md) · [Milestone 3 branch](https://github.com/Eilon343/AllAboard/tree/milestone-3)
+[Game pitch](pitch.md) · [Decisions](DECISIONS.md) · [Economy sheet](https://docs.google.com/spreadsheets/d/1MK3pVl9tQjG8-5nP4lOEgUonI_AhnZWor8q7vUXKwgg/edit?usp=sharing) · [Agent guidelines](AGENTS.md) · [Milestone 3 branch](https://github.com/Eilon343/AllAboard/tree/milestone-3)
