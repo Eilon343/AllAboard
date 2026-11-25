@@ -15,7 +15,9 @@ MonoBehaviour:
   coinsPerLevel: 20
   dailyGift: 50
   plunderReward: 5
-  countinuePrice: 50
+  continuePrice: 50
   upgradeBaseCost: 150
   upgradeGrowth: 1.5
   upgradeMaxLevel: 10
+  baseHp: 100
+  hpPerUpgrade: 10
