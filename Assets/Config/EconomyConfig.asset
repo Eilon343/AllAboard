@@ -9,13 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6f17e4304f5be44d9412f6607da4d7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fdf71c30cae27747aeb8dc7362da204, type: 3}
   m_Name: EconomyConfig
   m_EditorClassIdentifier: Services::EconomyConfig
-  _friendlyWinChance: 0.7
-  _friendlyReward: 20
-  _aggressiveWinChance: 0.45
-  _aggressiveReward: 50
-  _loseReward: 5
-  _upgradeBasePrice: 50
-  _upgradeGrowth: 1.5
+  coinsPerLevel: 20
+  dailyGift: 50
+  plunderReward: 5
+  continuePrice: 50
+  upgradeBaseCost: 150
+  upgradeGrowth: 1.5
+  upgradeMaxLevel: 10
+  baseHp: 100
+  hpPerUpgrade: 10
+  friendlyWinChance: 0.7
+  aggressiveWinChance: 0.45

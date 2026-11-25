@@ -6,7 +6,22 @@
 
 ## The game
 
-A one-thumb, hybrid-casual sailing game. Players will steer a ship, choose whether to befriend or attack passing vessels, and use rewards to upgrade their ship across short 1–3 minute runs. The current build is a mobile greybox; full sailing and encounter mechanics are planned.
+A one-thumb, hybrid-casual sailing game. Players will steer a ship, choose whether to befriend or attack passing vessels, and use rewards to upgrade their ship across short 1–3 minute runs.
+The current build features a playable sailing and encounter loop, Friendly/Aggressive interactions, persistent coin rewards, HP upgrades, reusable UI prefabs and a shared economy configuration. Combat, advanced sailing physics and procedural world generation are planned for future milestones.
+
+## Milestone 4 — Playable Loop and Progression
+
+- Playable sailing with a temporary encounter system.
+- Friendly and Aggressive interactions with configurable success probabilities.
+- Stage completion and plunder rewards read from `Services.Config.Economy`.
+- Persistent HP upgrades with an exponential price curve.
+- Shared CurrencyBox prefab and live currency updates.
+- Synchronized HP and currency displays between Home and Level.
+- Encounter and result popups using the shared visual style.
+
+**Documentation:** [Decisions](DECISIONS.md) · [Credits](CREDITS.md)
+
+**Integration:** [Milestone 4 gameplay PR #6](https://github.com/Eilon343/AllAboard/pull/6).
 
 ## Milestone 4 — Economy
 
