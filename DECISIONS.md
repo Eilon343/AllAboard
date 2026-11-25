@@ -3,6 +3,60 @@
 
 A few decisions we made while putting together the first version of **All Aboard!**. We're keeping this log short and adding to it as we actually make choices.
 
+## 2026-11-25 — Shared Economy and Persistent Ship Upgrades
+
+**Options:** Maintain separate economy configurations for gameplay and upgrades / hardcode economy values in gameplay scripts / use one shared `EconomyConfig` through `IConfigService`.
+
+**Chose:** Use a single `EconomyConfig` ScriptableObject, accessed through `Services.Config.Economy`, with values defined according to our agreed economy sheet.
+
+- Stage completion: 20 coins.
+- Successful ship plunder: 5 additional coins.
+- Befriending a ship alone: no coin reward.
+- Failed encounters: no reward.
+- Base upgrade cost: 150 coins.
+- Upgrade growth multiplier: 1.5.
+- Base ship HP: 100.
+- HP per upgrade: 10.
+- Maximum upgrade level: 10.
+
+Upgrade prices follow the exponential curve:
+
+`Cost(level) = RoundToInt(150 × 1.5^level)`
+
+Maximum ship health follows:
+
+`MaxHP(level) = 100 + 10 × level`
+
+Both coins and upgrade levels are persisted through `Services.Save`. The Home and Level scenes display the same saved values.
+
+**Why:** Keeping economy values in one configuration prevents inconsistencies between gameplay, rewards and upgrades. The exponential price curve makes early upgrades accessible while providing longer-term progression. Separating stage completion rewards from plunder rewards allows us to expand the encounter system without redesigning the economy.
+
+**Current limitations:** Encounters currently use fixed success probabilities of 70% for Friendly and 45% for Aggressive. These are configurable but do not yet depend on ship strength, HP or upgrades. HP upgrades currently increase maximum health; actual combat damage is not implemented.
+
+**Future expansion:** Friendly encounters may recruit allied ships that assist in combat or escort missions. A candidate dynamic combat probability model is:
+
+`P(win) = PlayerFleetStrength / (PlayerFleetStrength + EnemyFleetStrength)`
+
+This model assumes positive combined fleet strength and may incorporate HP, cannons, upgrades and allied ships. It requires further balancing and testing before implementation.
+
+**AI:** Claude assisted Eilon with the economy configuration, Home UI and HP upgrade implementation. ChatGPT assisted Dor with merge-conflict resolution, gameplay integration, reward calculations, reusable UI components and debugging. We selected the shared economy rules and manually integrated and tested the systems in Unity.
+
+**Who:** Dor and Eilon.
+
+## 2026-11-25 — Reuse shared UI through prefabs
+
+**Options:** Maintain separate copies of UI elements in every scene / use reusable Unity Prefabs.
+
+**Chose:** Convert the `CurrencyBox` into a shared Prefab used by both Home and Level. Organize the Level UI into TopBar, ButtonBar and PopUps containers.
+
+**Why:** Shared prefabs reduce duplicated UI components, maintain consistent visual design and simplify future changes. Both scenes read the saved currency balance through `CoinCounter`, and the encounter system refreshes the Level HUD immediately after awarding coins.
+
+**Trade-off:** Scene-specific references and prefab overrides must be managed carefully. In the future, an event-driven currency system could remove the direct dependency between encounter logic and the HUD.
+
+**AI:** Helped explain prefab reuse, identify incorrect Inspector references, and troubleshoot live currency updates and popup alignment.
+
+**Who:** Dor.
+
 ## 2026-11-18 — Save through an interface, not PlayerPrefs
 
 **Options:** Call `PlayerPrefs` directly from each screen / put saving behind an `ISaveService` interface

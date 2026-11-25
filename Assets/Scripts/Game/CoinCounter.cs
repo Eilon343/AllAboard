@@ -16,5 +16,5 @@ public class CoinCounter : MonoBehaviour
         Show();
     }
 
-    void Show() => label.text = Services.Save.GetInt(Key).ToString();
+    public void Show() => label.text = Services.Save.GetInt(Key).ToString();
 }

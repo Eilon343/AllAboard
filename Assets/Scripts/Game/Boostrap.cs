@@ -36,3 +36,4 @@ public class Bootstrap : MonoBehaviour
         SceneManager.LoadScene("Home");      // only now: the first screen
     }
 }
+

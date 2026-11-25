@@ -21,3 +21,5 @@ MonoBehaviour:
   upgradeMaxLevel: 10
   baseHp: 100
   hpPerUpgrade: 10
+  friendlyWinChance: 0.7
+  aggressiveWinChance: 0.45
