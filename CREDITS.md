@@ -56,6 +56,22 @@ The following entries document the assets known to be in the project before fina
 
 SVG Heart license references: [Free SVG license](https://www.svgheart.com/free-svgs-license/) and [Single design license](https://www.svgheart.com/single-design-license/).
 
+## Post-M4 UI Icons
+
+- Handshake: https://lucide.dev/icons/handshake
+- Crossed swords: https://lucide.dev/icons/swords
+- Heart: https://lucide.dev/icons/heart
+
+Source: Lucide icon library.
+
+License information: https://lucide.dev/license
+
+The icons were imported and converted into transparent white PNG variants by Dor Mandel using Python and Pillow, with ChatGPT assistance.
+
+White sprite variants allow runtime color customization through Unity UI.
+
+Location: `Assets/Sprites/UI/Icons/`.
+
 ## Replacement and future soundtrack references
 
 The following are candidate sources, not a statement that the assets have been integrated:

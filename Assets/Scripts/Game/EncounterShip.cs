@@ -34,6 +34,9 @@ public sealed class EncounterShip : MonoBehaviour
     private bool _canInteract;
     private bool _resolved;
 
+    // for locking Toggle interaction
+    private bool _lockedFriendlyMode;
+
     [Header("HUD")] [SerializeField] private CoinCounter _coinCounter;
 
     /// <summary>Begin a fresh run with both popups hidden.</summary>
@@ -41,6 +44,7 @@ public sealed class EncounterShip : MonoBehaviour
     {
         if (_encounterPanel != null) _encounterPanel.SetActive(false);
         if (_resultPanel != null) _resultPanel.SetActive(false);
+        if (_modeToggle != null) _modeToggle.interactable = true;
     }
 
     /// <summary>Offer an interaction when the player enters this world's trigger.</summary>
@@ -50,15 +54,26 @@ public sealed class EncounterShip : MonoBehaviour
             other.attachedRigidbody != _playerBody)
             return;
 
-        _canInteract = true;
-        if (_shipMotor != null) _shipMotor.enabled = false;
-        if (_playerBody != null)
+        if (_modeToggle == null)
         {
-            _playerBody.linearVelocity = Vector2.zero;
-            _playerBody.angularVelocity = 0f;
+            Debug.LogError("EncounterShip: Missing mode toggle.", this);
+            return;
         }
 
-        if (_encounterPanel != null) _encounterPanel.SetActive(true);
+        // Capture and lock the selected encounter mode.
+        _lockedFriendlyMode = _modeToggle.isOn;
+        _modeToggle.interactable = false;
+
+        _canInteract = true;
+
+        if (_shipMotor != null)
+            _shipMotor.enabled = false;
+
+        _playerBody.linearVelocity = Vector2.zero;
+        _playerBody.angularVelocity = 0f;
+
+        if (_encounterPanel != null)
+            _encounterPanel.SetActive(true);
     }
 
     /// <summary>
@@ -82,7 +97,15 @@ public sealed class EncounterShip : MonoBehaviour
         }
 
         EconomyConfig economy = Services.Config.Economy;
-        bool friendly = _modeToggle.isOn;
+
+        // Capture the player's decision.
+        bool friendly = _lockedFriendlyMode;
+
+        // Prevent duplicate rewards.
+        _resolved = true;
+
+        // prevent change modes midPopup
+        _modeToggle.interactable = false;
 
         // M4: Fixed Probability System.
         // Probabilities are configurable through EconomyConfig,
@@ -117,9 +140,6 @@ public sealed class EncounterShip : MonoBehaviour
             : 0;
 
         int reward = stageReward + plunderReward;
-
-        // Prevent duplicate rewards.
-        _resolved = true;
 
         Services.Save.SetInt(
             CoinCounter.Key,
