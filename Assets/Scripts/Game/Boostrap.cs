@@ -10,14 +10,26 @@ public class Bootstrap : MonoBehaviour
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);       // Services survives every scene change
+        DontDestroyOnLoad(gameObject); // Services survives every scene change
 
         // Start every service here, in order
-        Services.Save = new PlayerPrefsSaveService();   // 1 · save
+        Services.Save = new PlayerPrefsSaveService(); // 1 · save
         Services.Config = new ScriptableObjectConfigService(economyConfig); // init config using scriptable object
         Services.Settings = new SettingsService(Services.Save); // init settings using save service
         if (economyConfig == null)
             Debug.LogError("Bootstrap: drag the EconomyConfig asset into the Economy Config field");
+
+        // ADDED HP system:
+        int upgradeLevel = Services.Save.GetInt(
+            UpgradeButton.LevelKey);
+
+        int maxHp = Services.Config.Economy.MaxHp(upgradeLevel);
+
+        Services.PlayerHealth = new ShipHealth(maxHp);
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        gameObject.AddComponent<ShipHealthDebug>();
+#endif
 
         Debug.Log("Bootstrap: services ready");
 
@@ -33,7 +45,6 @@ public class Bootstrap : MonoBehaviour
         }
 #endif
 
-        SceneManager.LoadScene("Home");      // only now: the first screen
+        SceneManager.LoadScene("Home"); // only now: the first screen
     }
 }
-

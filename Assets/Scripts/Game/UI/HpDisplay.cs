@@ -1,16 +1,45 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 // HpDisplay.cs: on TXT_HP in Home. Shows the ship's max HP from the HP upgrade level.
+[DisallowMultipleComponent]
 public class HpDisplay : MonoBehaviour
 {
-    [SerializeField] TMP_Text label;
+    [Header("UI References")]
+    [SerializeField] private TMP_Text label;
+    [SerializeField] private Image hullFill;
+    // [SerializeField] private Image hullBackground;
 
-    void Start() => Show();
+    private ShipHealth _health;
+
+    private void OnEnable()
+    {
+        _health = Services.PlayerHealth;
+
+        if (_health == null)
+            return;
+
+        _health.Changed += Show;
+        Show();
+    }
+
+    private void OnDisable()
+    {
+        if (_health != null)
+            _health.Changed -= Show;
+    }
 
     public void Show()
     {
-        int level = Services.Save.GetInt(UpgradeButton.LevelKey);
-        label.text = $"HP {Services.Config.Economy.MaxHp(level)}";
+        if (_health == null)
+            return;
+
+        if (label != null)
+            label.text =
+                $"{_health.CurrentHp}/{_health.MaxHp}";
+
+        if (hullFill != null)
+            hullFill.fillAmount = _health.NormalizedHP;
     }
 }

@@ -3,6 +3,92 @@
 
 A few decisions we made while putting together the first version of **All Aboard!**. We're keeping this log short and adding to it as we actually make choices.
 
+## 2026-11-27 — Shared Ship Health and Hull-Based HUD
+
+**Options:** Display maximum HP only / use a conventional health bar / use the equipped ship hull as a dynamic health indicator.
+
+**Chose:** Separate ship health logic from its visual representation. Track current and maximum HP through ShipHealth and display both through a reusable HealthBox prefab.
+
+The hull meter uses two overlapping UI Images:
+
+- Hull background: represents the damaged or empty portion.
+- Hull fill: represents remaining health.
+- TextMeshPro label: displays CurrentHP/MaxHP.
+
+The fill ratio is calculated as:
+
+`NormalizedHP = CurrentHP / MaxHP`
+
+**Why:** This creates a health indicator that fits the game's visual identity while keeping health logic independent from artwork and UI.
+
+**Debug controls:** F6 for damage, F7 for repair and F8 for restoring full health. Developer controls are restricted to Editor and Development Builds.
+
+**Future expansion:** Dynamically bind the HUD to the equipped hull sprite, support interchangeable hulls, and introduce damage animations, flooding, wreckage and combat feedback.
+
+**Validation:** Health changes, debug controls and hull filling were tested locally in Unity. Additional hull variants and Android regression testing remain pending.
+
+**AI:** ChatGPT assisted with architecture, implementation guidance, debugging and UI configuration.
+
+**Who:** Dor.
+
+## 2026-11-27 — Responsive UI and Encounter Mode Protection
+
+**Options:** Independently position UI elements / organize UI into responsive containers with reusable components.
+
+**Chose:** Organize the Level UI into RectTransform-based containers: TopBar, ButtonBar and PopUps, under SafeAreaPanel.
+
+Reuse CurrencyBox and HealthBox prefabs across screens.
+
+The encounter mode UI dynamically changes its text, color and icon between Friendly and Aggressive. The interaction button reflects the selected action.
+
+Lock the encounter mode during resolution to prevent changing the selected action after committing to an encounter.
+
+**Why:** Responsive containers improve maintainability and screen alignment. Encounter locking prevents inconsistent gameplay states.
+
+**Future expansion:** Navigation back stack, reusable screen management, customization panels and device-specific layout validation.
+
+**AI:** ChatGPT assisted with UI architecture, Inspector configuration, event handling and debugging.
+
+**Who:** Dor.
+
+## 2026-11-27 — Responsive UI and Reusable HUD Components
+
+**Options:** Use independent UI elements with manually adjusted positions in each scene / organize the UI into responsive RectTransform containers and reusable prefabs.
+
+**Chose:** Organize the gameplay UI into three main RectTransform containers under SafeAreaPanel:
+
+- `TopBar` — currency, health and navigation.
+- `ButtonBar` — steering and interaction controls.
+- `PopUps` — encounter and result panels.
+
+Reuse `CurrencyBox.prefab` and `HealthBox.prefab` across screens rather than duplicating their implementations.
+
+**Why:** Responsive containers simplify alignment across screen sizes, while shared prefabs maintain consistent appearance and behavior across Home, Level and future Shipyard screens.
+
+**Trade-off:** Anchors, pivots, parent dimensions and prefab overrides must be managed carefully. Visual animations should affect child objects rather than layout containers.
+
+**AI:** ChatGPT assisted with RectTransform troubleshooting, prefab architecture and UI alignment. Dor implemented and tested the changes in Unity.
+
+**Who:** Dor.
+
+## 2026-11-27 — Dynamic Encounter Mode and Health Indicators
+
+**Options:** Static text and colored checkmarks / dynamic labels, icons and colors driven by the current interaction state.
+
+**Chose:** Use `EncounterModeUI` to synchronize the Friendly/Aggressive toggle with its visual representation. Friendly uses a handshake icon and green background; Aggressive uses crossed swords and a red background.
+
+Use transparent white UI sprites so their colors can be controlled through Unity without generating separate textures for every color.
+
+Replace the textual HP prefix with a red heart icon and numeric health value inside the reusable HealthBox.
+
+**Why:** Icons, text and colors communicate the selected state clearly and provide consistent visual feedback.
+
+**Current limitation:** Health currently represents upgrade-derived maximum HP. Actual combat damage, current run health, hull-specific health visualization and impact effects are not implemented yet.
+
+**AI:** ChatGPT assisted with icon conversion, UI scripting, alignment and debugging. Dor integrated and tested the components in Unity.
+
+**Who:** Dor.
+
 ## 2026-11-25 — Shared Economy and Persistent Ship Upgrades
 
 **Options:** Maintain separate economy configurations for gameplay and upgrades / hardcode economy values in gameplay scripts / use one shared `EconomyConfig` through `IConfigService`.

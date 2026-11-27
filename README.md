@@ -36,6 +36,54 @@ The Mechanics Lab is a separate experimental environment. Not all demonstrated m
 
 **Integration:** [Milestone 4 gameplay PR #6](https://github.com/Eilon343/AllAboard/pull/6).
 
+## Post-Milestone 4 — Active Development
+
+### Encounter UI and Hull Health V1
+
+- Dynamic Friendly/Aggressive labels, colors and icons.
+- Dynamic Befriend/Attack interaction labels.
+- Encounter mode locking during resolution.
+- Shared HealthBox prefab.
+- Current and maximum ship HP.
+- Hull-shaped health meter.
+- Developer damage, repair and restore controls.
+- Responsive UI containers using RectTransform and Safe Area.
+
+### Developer controls
+
+| Key | Action |
+|---|---|
+| F6 | Damage ship |
+| F7 | Repair ship |
+| F8 | Restore full health |
+
+Available in Unity Editor and Development Builds only.
+
+### Upcoming systems
+
+- Dynamic equipped hull and synchronized hull HUD.
+- Modular ship parts and persistent equipment.
+- Ship upgrade and purchase mechanics.
+- Pimp My Ship customization screen.
+- Navigation back stack.
+- Compass and minimap.
+- Seeded procedural world generation.
+- Wind, sail physics and water rendering.
+- Combat, damage feedback and pirate soundtrack.
+
+Development continues through feature branches merged into `develop`. Submitted milestone branches remain unchanged.
+
+## Post-Milestone 4 — UI Improvements V1
+
+- Responsive RectTransform-based UI containers.
+- Reusable CurrencyBox and HealthBox prefabs.
+- Numeric health display with a heart icon.
+- Dynamic Friendly/Aggressive labels, colors and icons.
+- Improved encounter and result popup alignment.
+- Tintable transparent UI sprites.
+
+Future mechanics are tracked separately in Jira and prototyped in the Mechanics Lab. The submitted milestone-4 branch remains separate from ongoing development.
+
 ## Milestone 4 — Economy
 
 **[Economy sheet](https://docs.google.com/spreadsheets/d/1MK3pVl9tQjG8-5nP4lOEgUonI_AhnZWor8q7vUXKwgg/edit?usp=sharing)**: one currency (coins). Per session (~3 runs): 320 coins in (stages cleared, daily gift, plundered ships), 50 out (Continue), 270 left for upgrades. Upgrade price = 150 × 1.5^(upgrade − 1). Both checks: **Yes**.
